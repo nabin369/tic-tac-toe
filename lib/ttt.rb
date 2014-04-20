@@ -37,21 +37,21 @@ class Position
 		(0..@size.pred).each_slice(@dim).to_a +
 		(0..@size.pred).each_slice(@dim).to_a.transpose	+
 		[(0..@size.pred).step(@dim.succ).to_a] +
-		[(@dim.pred..@size-@dim).step(@dim.pred).to_a]
+		[(@dim.pred..(@size-@dim)).step(@dim.pred).to_a]
 		).map {|lines| lines.map {|index| @board[index]}}	
 	end
 
 	def win? piece
-		win_lines.any? do |line|
+		win_lines.any? { |line|
 			line.all? { |line_piece| line_piece == piece }
-		end
+		}
 	end
 
 	def blocked?
-		win_lines.any? do |line|
+		win_lines.all? { |line|
 			line.any? { |line_piece| line_piece == "x" } &&
-			line.any? { |line_piece| line_piece == "o" }	
-		end
+			line.any? { |line_piece| line_piece == "o" }
+		}	
 	end
 
 	def evaluate_leaf
