@@ -95,7 +95,27 @@ describe Position do
 		it "should determine blocked" do
 			Position.new(%w(x o x
 					o x o
-					x o x)).blocked?.should == true
+					o x o)).blocked?.should == true
+		end
+	end
+
+	context "#minimax" do
+		it "should already won position" do
+			Position.new(%w(x x x
+					o o -
+					x o o)).minimax.should == 100
+		end
+
+		it "should determine win in 1 for x" do
+			Position.new(%w(x x -
+					- - -
+					- o o), "x").minimax.should == 99
+		end
+			
+		it "should determine win in 1 for o" do
+			Position.new(%w(x x -
+					- - -
+					- o o), "o").minimax.should == -99
 		end
 	end
 
@@ -123,25 +143,6 @@ describe Position do
 		end
 	end
 
-	context "#minmax" do
-		it "should determine already won position" do
-			Position.new(%w(x x -
-					x o o
-					x o o)).minmax.should == 100
-		end
-
-		it "should determine a win in 1 for x" do
-			Position.new(%w(x x -
-					- - -
-					- o o), "x").minmax.should == 99
-		end
-
-		it "should determine a win in 1 for o" do
-			Position.new(%w(x x -
-					- - -
-					- o o), "o").minmax.should == -99
-		end
-	end
 
 	context "#best_move" do
 		it "should find the winning move for x" do

@@ -58,13 +58,18 @@ class Position
 		return    0 if blocked?
 	end
 
-	def minmax 
+	def minimax(index=nil)
+		move(index) if index
 		leaf_value = evaluate_leaf
 		return leaf_value if leaf_value
+		possible_moves.map { |index|
+			minimax(index).send(@turn == "x" ? :- : :+, @moveList.count+1)}.send(@turn == "x" ? :max : :min)
+	ensure
+		unmove if index
 	end
 	
 	def best_move
-		possible_moves.send(@turn == "x" ? :max_by : :min_by) { |idx| minmax(idx)}
+		possible_moves.send(@turn == "x" ? :max_by : :min_by) { |idx| minimax(idx)}
 	end
 
 	def end?
@@ -125,8 +130,4 @@ class TTT
 
 end
 
-#if __FILE__ == $0
-#	ttt = TTT.new
-#	ttt.play_game
-#end
 
