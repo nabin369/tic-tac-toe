@@ -6,18 +6,18 @@ describe Position do
 		it "should initialize a new board" do
 			position = Position.new
 			position.board.should == %w(- - -	
-					            		- - -
-						    			- - -)
+					            - - -
+						    - - -)
 			position.turn.should == "x"
 		end
 
 		it "should initialize a position given a board and turn" do
 			position = Position.new(%w(- x -
-						    		   - - -
-						    		   - o -), "o")
+						   - - -
+						   - o -), "o")
 			position.board.should == %w(- x -
-						    		    - - -
-						    		    - o -)
+						    - - -
+						    - o -)
 			position.turn.should == "o"
 		end
 	end
@@ -26,8 +26,8 @@ describe Position do
 		it "should make a move" do
 			position = Position.new.move(0)		
 			position.board.should == %w(x - -
-						    			- - -
-						    			- - -)
+						    - - -
+						    - - -)
 			position.turn.should == "o"
 		end
 	end
