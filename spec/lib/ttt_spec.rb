@@ -95,7 +95,7 @@ describe Position do
 		it "should determine blocked" do
 			Position.new(%w(x o x
 					o x o
-					x o x)).blocked?.should == true
+					o x o)).blocked?.should == true
 		end
 	end
 
