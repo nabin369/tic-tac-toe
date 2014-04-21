@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'ttt'
 
 describe Position do
 	
@@ -7,18 +6,18 @@ describe Position do
 		it "should initialize a new board" do
 			position = Position.new
 			position.board.should == %w(- - -	
-					            - - -
-						    - - -)
+					            		- - -
+						    			- - -)
 			position.turn.should == "x"
 		end
 
 		it "should initialize a position given a board and turn" do
 			position = Position.new(%w(- x -
-						    - - -
-						    - o -), "o")
+						    		   - - -
+						    		   - o -), "o")
 			position.board.should == %w(- x -
-						    - - -
-						    - o -)
+						    		    - - -
+						    		    - o -)
 			position.turn.should == "o"
 		end
 	end
@@ -27,8 +26,8 @@ describe Position do
 		it "should make a move" do
 			position = Position.new.move(0)		
 			position.board.should == %w(x - -
-						    - - -
-						    - - -)
+						    			- - -
+						    			- - -)
 			position.turn.should == "o"
 		end
 	end
@@ -55,8 +54,8 @@ describe Position do
 	context "#win_lines" do
 		it "should find winning column, rows and diagonals" do
 			win_lines = Position.new(%W(0 1 2
-						    3 4 5
-						    6 7 8)).win_lines
+						   				3 4 5
+						    			6 7 8)).win_lines
 			win_lines.should include(["0","1","2"])
 			win_lines.should include(["3","4","5"])
 			win_lines.should include(["6","7","8"])
@@ -96,6 +95,7 @@ describe Position do
 			Position.new(%w(x o x
 					o x o
 					o x o)).blocked?.should == true
+<<<<<<< HEAD
 		end
 	end
 
@@ -116,6 +116,8 @@ describe Position do
 			Position.new(%w(x x -
 					- - -
 					- o o), "o").minimax.should == -99
+=======
+>>>>>>> master
 		end
 	end
 
